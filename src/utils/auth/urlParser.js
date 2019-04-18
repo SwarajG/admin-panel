@@ -1,7 +1,7 @@
 import { cookiesList } from './cookieList';
 
-export function setCookies(accessToken) {
-  setCookieToStore(cookiesList.accessToken, accessToken);
+export function setCookies(token) {
+  setCookieToStore(cookiesList.token, token);
 }
 
 export function getCookieFromKey(key) {

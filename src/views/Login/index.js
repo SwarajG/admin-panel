@@ -28,7 +28,6 @@ export default class Login extends Component {
 
   render() {
     const { userName, password } = this.state;
-    console.log(auth.isAuthenticated(), auth.getUser());
     if (auth.isAuthenticated()) {
       window.location.href = '/dashboard';
     }

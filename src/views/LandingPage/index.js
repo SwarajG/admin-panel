@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown, Icon } from 'antd';
 import { navBar } from '../../utils/enums';
 import auth from '../../utils/auth';
 import { renderContentPage } from '../ContentPage';
@@ -23,6 +23,25 @@ export default class LandingPage extends Component {
     </Menu.Item>
   )
 
+  renderMenu = () => (
+    <Menu>
+      <Menu.Item key="0">
+        <p className={s.menuText}>
+          Change Password
+        </p>
+      </Menu.Item>
+      <Menu.Item key="0">
+        <p className={s.menuText}
+          onClick={() => auth.logout(() => {
+            window.location.href = '/';
+          })}
+        >
+          Logout
+        </p>
+      </Menu.Item>
+    </Menu>
+  )
+
   render() {
     const { selectedKeys } = this.state;
     const authUser = auth.getUser();
@@ -33,22 +52,29 @@ export default class LandingPage extends Component {
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
+          width={256}
         >
-          <div className={s.logo} />
+          <div className={s.logo}>
+            <h1 className={s.name}>{user.agent.userName}</h1>
+          </div>
           <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
-            {['DASHBOARD'].concat(aclDetails).map(this.renderMenuItem)}
+            {aclDetails.map(this.renderMenuItem)}
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
-          <Content style={{ margin: '24px 16px 0' }}>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <div className={s.headerWrapper}>
+              <p className={s.headerName}>{user.agent.firstName} {user.agent.lastName}</p>
+              <Dropdown overlay={() => this.renderMenu()} trigger={['click']}>
+                <Icon type="user" />
+              </Dropdown>
+            </div>
+          </Header>
+          <Content>
+            <div style={{ padding: 24, minHeight: 360 }}>
               {renderContentPage(selectedKeys[0])}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
         </Layout>
       </Layout>
     )

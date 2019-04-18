@@ -1,3 +1,3 @@
 export const cookiesList = {
-  accessToken: 'accessToken'
+  token: 'token'
 };

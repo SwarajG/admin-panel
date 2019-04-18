@@ -1,12 +1,12 @@
 import { getCookieFromKey, setCookies, deleteCookieByName } from './urlParser';
-import { getUser, setUser } from './userHelper';
+import { getUser, setUser, deleteUser } from './userHelper';
 import { cookiesList } from './cookieList';
 
 class Auth {
   constructor() {
-    const accessToken = getCookieFromKey(cookiesList.accessToken);
+    const token = getCookieFromKey(cookiesList.token);
     const user = getUser();
-    this.authenticated = !!accessToken;
+    this.authenticated = !!token;
     this.user = user;
   }
 
@@ -21,7 +21,8 @@ class Auth {
   logout(cb) {
     this.authenticated = false;
     this.user = null;
-    deleteCookieByName(cookiesList.accessToken);
+    deleteUser();
+    deleteCookieByName(cookiesList.token);
     cb();
   }
 
