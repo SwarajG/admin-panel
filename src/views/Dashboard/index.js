@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
 import { Table, Row, Col, Icon, Input, Button, message } from 'antd';
-// import { colors } from '../../utils/enums';
-import auth from '../../utils/auth';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
-import request from '../../request';
+import { dashboardRequest, updateMessage } from '../../request/dashboard';
 import { formatTableData, getColumns } from './columns';
 import s from './styles';
 
 const { TextArea } = Input;
-const authUser = auth.getUser();
-const { agent } = authUser.response;
-const agentId = agent._id;
-
 const success = () => {
   message.success('Successfully updated the message...');
 };
-
 const error = () => {
   message.error('Failed to updated the message...');
 };
 
 export default class Dashboard extends Component {
-
   state = {
     dashboard: null,
     loading: true,
@@ -30,14 +22,13 @@ export default class Dashboard extends Component {
   };
 
   async componentDidMount() {
-    const jsonResponse = await request.dashboardRequest(agentId);
+    const jsonResponse = await dashboardRequest();
     const response = await jsonResponse.json();
     this.setState({
       loading: false,
       dashboard: response.response,
       message: response.response.adSMassage
     });
-    console.log(response);
   }
 
   getStatusValues = (summaryCount) => {
@@ -62,7 +53,7 @@ export default class Dashboard extends Component {
 
   updateGameMessage = async () => {
     const { message } = this.state;
-    const jsonResponse = await request.updateMessage(agentId, message.trim());
+    const jsonResponse = await updateMessage(message.trim());
     const response = await jsonResponse.json();
     response.success ? success() : error();
   }

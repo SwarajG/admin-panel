@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Dropdown, Icon } from 'antd';
-import { navBar } from '../../utils/enums';
+import { navBar, selectedKey } from '../../utils/enums';
 import auth from '../../utils/auth';
 import { renderContentPage } from '../ContentPage';
 import s from './styles';
 
 const {
-  Header, Content, Footer, Sider,
+  Header, Content, Sider
 } = Layout;
 
 export default class LandingPage extends Component {
-
-  state = {
-    selectedKeys: ['Dashboard']
+  onSelectedMenuChange = (key) => {
+    const path = key.toLowerCase().split(' ').join('-');
+    window.location.href = '/' + path;
   }
-
-  onSelectedMenuChange = (key) => this.setState({ selectedKeys: [key] })
 
   renderMenuItem = item => (
     <Menu.Item key={navBar[item]} onClick={() => this.onSelectedMenuChange(navBar[item])}>
@@ -43,10 +41,11 @@ export default class LandingPage extends Component {
   )
 
   render() {
-    const { selectedKeys } = this.state;
     const authUser = auth.getUser();
+    const type = this.props.match.params.type;
     const user = authUser && authUser.response;
     const { aclDetails } = user;
+    const slectedValue = [selectedKey[type]];
     return (
       <Layout>
         <Sider
@@ -57,7 +56,7 @@ export default class LandingPage extends Component {
           <div className={s.logo}>
             <h1 className={s.name}>{user.agent.userName}</h1>
           </div>
-          <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
+          <Menu theme="dark" mode="inline" selectedKeys={slectedValue}>
             {aclDetails.map(this.renderMenuItem)}
           </Menu>
         </Sider>
@@ -72,7 +71,7 @@ export default class LandingPage extends Component {
           </Header>
           <Content>
             <div style={{ padding: 24, minHeight: 360 }}>
-              {renderContentPage(selectedKeys[0])}
+              {renderContentPage(slectedValue[0])}
             </div>
           </Content>
         </Layout>

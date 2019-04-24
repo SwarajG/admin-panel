@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.16.3",
+    "clone-deep": "^4.0.1",
     "emotion": "^10.0.9",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

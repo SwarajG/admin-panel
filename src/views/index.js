@@ -4,7 +4,7 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 
 export default function Main() {
-  if (auth.isAuthenticated) {
+  if (auth.isAuthenticated()) {
     return <LandingPage />
   }
   return <Login />

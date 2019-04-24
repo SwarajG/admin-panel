@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Icon, Button } from 'antd';
-import request from '../../request';
+import { loginRequest } from '../../request/login';
 import auth from '../../utils/auth'
 import s from './styles';
 
@@ -17,7 +17,7 @@ export default class Login extends Component {
 
   loginUser = async () => {
     const user = this.state;
-    const jsonResponse = await request.loginRequest(user);
+    const jsonResponse = await loginRequest(user);
     const response = await jsonResponse.json();
     if (response.success) {
       auth.login(response, () => {

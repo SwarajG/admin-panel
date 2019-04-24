@@ -13,6 +13,7 @@ import TableDetails from '../TableDetails';
 
 const contentWrapper = css`
   min-height: 80vh;
+  overflow: auto;
 `;
 
 export function renderContentPage(key) {

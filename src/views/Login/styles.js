@@ -8,6 +8,9 @@ const contentWrapper = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (min-width: 420px) {
+    width: 80%;
+  }
 `;
 
 const title = css`

@@ -19,8 +19,7 @@ export default function RoutesListing() {
           <Route path="/login" exact component={Login} />
         </Switch>
         <AuthenticatedRoute
-          exact
-          path="/dashboard"
+          path="/:type"
           component={LandingPage}
           isLoggedIn={isLoggedIn}
         />

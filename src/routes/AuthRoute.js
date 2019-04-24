@@ -4,13 +4,13 @@ import {
   Redirect
 } from 'react-router-dom';
 
-export default function AuthenticatedRoute(props) {
-  const { component: Component, isLoggedIn, ...rest } = props;
+export default function AuthenticatedRoute(superProps) {
+  const { component: Component, isLoggedIn, ...rest } = superProps;
   return (
-    <Route {...rest} render={() => {
+    <Route {...rest} render={(props) => {
       return isLoggedIn
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+        ? <Component {...superProps} {...props} />
+        : <Redirect to='/login' /* to={{ pathname: '/login', state: { from: props.location } }} */ />
     }} />
   );
 }

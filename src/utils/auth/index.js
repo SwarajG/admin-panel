@@ -33,6 +33,14 @@ class Auth {
   getUser() {
     return this.user;
   }
+
+  getAgentId() {
+    return this.user && this.user.response && this.user.response.agent._id;
+  }
+
+  getAgentRole() {
+    return this.user && this.user.response && this.user.response.agent.role;
+  }
 }
 
 export default new Auth();
