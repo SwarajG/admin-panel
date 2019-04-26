@@ -8,7 +8,7 @@ const contentWrapper = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  @media (min-width: 420px) {
+  @media (max-width: 620px) {
     width: 80%;
   }
 `;

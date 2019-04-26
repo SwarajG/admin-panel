@@ -10,9 +10,12 @@ import GameHistory from '../GameHistory';
 import GeneralSettings from '../GeneralSettings';
 import SuperMasterDetails from '../SuperMasterDetails';
 import TableDetails from '../TableDetails';
+import UserDetails from '../UserDetails';
+import SubAdminDetails from '../SubAdminDetails';
+import MasterDetails from '../MasterDetails';
 
 const contentWrapper = css`
-  min-height: 80vh;
+  min-height: 85vh;
   overflow: auto;
 `;
 
@@ -40,11 +43,20 @@ export function renderContentPage(key) {
     case navBar.GENERAL_SETTINGS:
       Component = GeneralSettings;
       break;
+    case navBar.TABLE_DETAILS:
+      Component = TableDetails;
+      break;
     case navBar.SUPER_MASTER_DETAILS:
       Component = SuperMasterDetails;
       break;
-    case navBar.TABLE_DETAILS:
-      Component = TableDetails;
+    case navBar.USER_DETAILS:
+      Component = UserDetails;
+      break;
+    case navBar.SUB_ADMIN_DETAILS:
+      Component = SubAdminDetails;
+      break;
+    case navBar.MASTER_DETAILS:
+      Component = MasterDetails;
       break;
     default:
       Component = Dashboard;

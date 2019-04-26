@@ -29,14 +29,14 @@ export default class WithDrawDepositPopup extends Component {
   }
 
   render() {
-    const { userName, update, type } = this.props;
+    const { userName, updateWithDrawDepositPopup, type } = this.props;
     const { amount, remark } = this.state;
     return (
       <Modal
         title={`Update ${userName}`}
         visible={true}
         onOk={this.handleSubmit}
-        onCancel={() => update(false)}
+        onCancel={() => updateWithDrawDepositPopup(false)}
       >
         <InputNumber
           placeholder={type === actionType.DEPOSIT ? 'Deposit' : 'Withdraw'}

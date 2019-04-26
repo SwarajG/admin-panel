@@ -28,7 +28,7 @@ export default class LandingPage extends Component {
           Change Password
         </p>
       </Menu.Item>
-      <Menu.Item key="0">
+      <Menu.Item key="1">
         <p className={s.menuText}
           onClick={() => auth.logout(() => {
             window.location.href = '/';

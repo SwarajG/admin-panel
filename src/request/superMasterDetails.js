@@ -4,7 +4,6 @@ import {
   actionType,
   agentRoles
 } from '../utils/enums';
-import auth from '../utils/auth';
 import { cookiesList } from '../utils/auth/cookieList';
 import { getCookieFromKey } from '../utils/auth/urlParser';
 const token = getCookieFromKey(cookiesList.token);
@@ -20,6 +19,8 @@ const agentDepositUrl = 'agent/depositChips';
 const agentWithdrawUrl = 'agent/withdrawChips';
 const userDepositUrl = 'user/depositChips';
 const userWithDrawUrl = 'user/withdrawChips';
+const agentCreateUrl = 'agent/create';
+const userCreateUrl = 'user/create';
 
 export const getTableDataDetails = (active, agentRole, parentId) => fetch(
   `${baseUrl}/${agentRole === agentRoles.USER ? userUrl : agentUrl}`, {
@@ -103,34 +104,14 @@ export const updateWithDrawDepositStatus = (type, agentId, agentRole, parentId, 
   })
 });
 
-export const createSuperMaster = ({
-  userName,
-  firstName,
-  lastName,
-  mobileNumber,
-  password,
-  role,
-  adminId,
-  adminCut,
-  superMasterId,
-  superMasterCut,
-  subAdminId,
-  subAdminCut,
-  parentId,
-  parentRole,
-  creditChips
-}) => fetch(`${baseUrl}/agent/create`, {
+export const createSuperMaster = (data) => fetch(
+  `${baseUrl}/${data.role === agentRoles.USER ? userCreateUrl : agentCreateUrl}`, {
   method: method.POST,
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    userName,
-    firstName,
-    lastName,
-    mobileNumber,
-    
-    parentId: auth.getAgentId(),
+    ...data,
     token
   })
 });

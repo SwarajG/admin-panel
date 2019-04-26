@@ -9,6 +9,7 @@ import {
   formatGiveTableData,
   getColumns
 } from './columns';
+import s from './styles';
 
 export default class ChipSummary extends Component {
   state = {
@@ -26,7 +27,7 @@ export default class ChipSummary extends Component {
     const data = formatGetTableData(getData);
     return (
       <Table
-        columns={getColumns()}
+        columns={getColumns(actions.GET)}
         dataSource={data}
         bordered
       />
@@ -37,7 +38,7 @@ export default class ChipSummary extends Component {
     const data = formatGiveTableData(giveData);
     return (
       <Table
-        columns={getColumns()}
+        columns={getColumns(actions.GIVE)}
         dataSource={data}
         bordered
       />
@@ -54,12 +55,14 @@ export default class ChipSummary extends Component {
     const giveAmounts = chipData.filter(data => data.action === actions.GIVE);
     return (
       <div>
-        <h1>Account history - {auth.getAgentRole()}</h1>
+        <h1 className={s.title}>Account history - {auth.getAgentRole()}</h1>
         <Row gutter={16}>
           <Col lg={12} sm={24}>
+            <h1>Get Amounts</h1>
             {this.renderGetData(getAmounts)}
           </Col>
           <Col lg={12} sm={24}>
+            <h1>Give Amounts</h1>
             {this.renderGiveData(giveAmounts)}
           </Col>
         </Row>

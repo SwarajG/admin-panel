@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Input, Icon, Button } from 'antd';
+import { Input, Icon, Button, message } from 'antd';
 import { loginRequest } from '../../request/login';
-import auth from '../../utils/auth'
+import auth from '../../utils/auth';
 import s from './styles';
 
 export default class Login extends Component {
@@ -16,13 +16,27 @@ export default class Login extends Component {
   }
 
   loginUser = async () => {
-    const user = this.state;
-    const jsonResponse = await loginRequest(user);
+    const { userName, password } = this.state;
+    if (!userName) {
+      message.error('Please enter user name');
+    }
+    if (!password) {
+      message.error('Please enter password');
+    }
+    const jsonResponse = await loginRequest(this.state);
     const response = await jsonResponse.json();
     if (response.success) {
       auth.login(response, () => {
         this.props.history.push('/dashboard');
       });
+    } else {
+      message.error(response.response);
+    }
+  }
+
+  onNameKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      this.loginUser();
     }
   }
 
@@ -40,6 +54,7 @@ export default class Login extends Component {
             suffix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             value={userName}
             onChange={this.updateValue('userName')}
+            onKeyPress={this.onNameKeyPress}
           />
         </div>
         <div className={s.inputWrapper}>
@@ -47,6 +62,7 @@ export default class Login extends Component {
             placeholder="Enter your password"
             value={password}
             onChange={this.updateValue('password')}
+            onKeyPress={this.onNameKeyPress}
           />
         </div>
         <div className={s.inputWrapper}>

@@ -1,4 +1,8 @@
-export function getColumns() {
+import React from 'react';
+import { actions } from '../../utils/enums';
+import s from './styles';
+
+export function getColumns(type) {
   return [{
     title: 'Sr. No.',
     dataIndex: 'index'
@@ -11,13 +15,20 @@ export function getColumns() {
   }, {
     title: 'Total',
     dataIndex: 'total',
+    render: (text, row) => {
+      if (type === actions.GET) {
+        return <p className={s.greenText}>{row.total}</p>;
+      }
+      return <p className={s.redText}>{row.total}</p>;
+    }
   }, {
     title: 'Settlement'
   }];
 }
 
 export function formatGiveTableData(data) {
-  return data.map((giveData, index) => ({
+  const filteredData = data.filter(d => d.username !== 'SP OWN' && d.username !== 'PARENT AC');
+  return filteredData.map((giveData, index) => ({
     index: index + 1,
     username: giveData.username,
     name: `${giveData.firstName || ''} ${giveData.lastName || ''}`,
@@ -26,7 +37,8 @@ export function formatGiveTableData(data) {
 }
 
 export function formatGetTableData(data) {
-  return data.map((getData, index) => ({
+  const filteredData = data.filter(d => d.username !== 'Cash on hand' && d.username !== 'PARENT AC');
+  return filteredData.map((getData, index) => ({
     index: index + 1,
     username: getData.username,
     name: `${getData.firstName || ''} ${getData.lastName || ''}`,

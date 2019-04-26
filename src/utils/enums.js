@@ -27,6 +27,7 @@ const navBar = {
   DASHBOARD: 'Dashboard',
   ONLINE_USERS: 'Online Users',
   GENERAL_SETTINGS: 'General Settings',
+  USER_DETAILS: 'User Details',
   SUB_ADMIN_DETAILS: 'Sub Admin Details',
   CHANGE_PARTENERSHIP: 'Change Partenership',
   TABLE_DETAILS: 'Table Details',
@@ -35,7 +36,8 @@ const navBar = {
   ACCOUNT_HISTORY: 'Account History',
   CHIP_SUMMARY: 'Chip Summary',
   ALL_SETTLEMENTS: 'All Settlements',
-  SEARCH: 'Search'
+  MASTER_DETAILS: 'Master Details',
+  SEARCH: 'Search',
 };
 
 const colors = {
@@ -46,22 +48,26 @@ const colors = {
 const selectedKey = {
   dashboard: navBar.DASHBOARD,
   'online-users': navBar.ONLINE_USERS,
+  'user-details': navBar.USER_DETAILS,
   'general-settings': navBar.GENERAL_SETTINGS,
   'sub-admin-details': navBar.SUB_ADMIN_DETAILS,
   'change-partenership': navBar.CHANGE_PARTENERSHIP,
   'table-details': navBar.TABLE_DETAILS,
   'super-master-details': navBar.SUPER_MASTER_DETAILS,
+  'master-details': navBar.MASTER_DETAILS,
   'game-history': navBar.GAME_HISTORY,
   'account-history': navBar.ACCOUNT_HISTORY,
   'chip-summary': navBar.CHIP_SUMMARY,
   'all-settlements': navBar.ALL_SETTLEMENTS,
-  search: navBar.SEARCH
+  search: navBar.SEARCH,
+
 };
 
 const agentRoles = {
   SUPER_MASTER: 'SUPER_MASTER',
   SUB_ADMIN: 'SUB_ADMIN',
-  USER: 'USER'
+  USER: 'USER',
+  ADMIN: 'ADMIN'
 };
 
 const roles = [{

@@ -84,8 +84,14 @@ export function getColumns(
     title: 'Name',
     dataIndex: 'name',
   }, {
-    title: 'Admin Cut',
-    dataIndex: 'adminCut',
+    title: 'Parent Cut',
+    render: (text, row) => {
+      let parentCut = 0;
+      row.adminCut && (parentCut += row.adminCut);
+      row.subAdminCut && (parentCut += row.subAdminCut);
+      row.superMasterCut && (parentCut += row.superMasterCut);
+      return <span>{parentCut}</span>;
+    }
   }, {
     title: 'SubAdmin Cut',
     dataIndex: 'subAdminCut',

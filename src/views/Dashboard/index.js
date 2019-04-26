@@ -5,6 +5,8 @@ import Loader from '../../components/Loader';
 import { dashboardRequest, updateMessage } from '../../request/dashboard';
 import { formatTableData, getColumns } from './columns';
 import s from './styles';
+import { agentRoles } from '../../utils/enums';
+import auth from '../../utils/auth';
 
 const { TextArea } = Input;
 const success = () => {
@@ -32,18 +34,21 @@ export default class Dashboard extends Component {
   }
 
   getStatusValues = (summaryCount) => {
-    const { status } = summaryCount;
-    const activeObject = status.find(s => s._id === 1);
-    const blockedObject = status.find(s => s._id === 0);
-    const lockedObject = status.find(s => s._id === 2);
-    const active = (activeObject && activeObject.count) || 0;
-    const blocked = (blockedObject && blockedObject.count) || 0;
-    const locked = (lockedObject && lockedObject.count) || 0;
-    return {
-      active,
-      blocked,
-      locked
-    };
+    if (summaryCount) {
+      const { status } = summaryCount;
+      const activeObject = status.find(s => s._id === 1);
+      const blockedObject = status.find(s => s._id === 0);
+      const lockedObject = status.find(s => s._id === 2);
+      const active = (activeObject && activeObject.count) || 0;
+      const blocked = (blockedObject && blockedObject.count) || 0;
+      const locked = (lockedObject && lockedObject.count) || 0;
+      return {
+        active,
+        blocked,
+        locked
+      };
+    }
+    return {};
   }
 
   updateLocalMessage = (e) => {
@@ -110,6 +115,7 @@ export default class Dashboard extends Component {
       tablePlayers
     } = dashboard;
     const { active, blocked } = this.getStatusValues(summaryCount);
+    const isAdmin = agentRoles.ADMIN === auth.getAgentRole();
     return (
       <div>
         <h1>Admin Details</h1>
@@ -126,17 +132,21 @@ export default class Dashboard extends Component {
         <Row gutter={16}>
           {this.renderCard({ title: 'Users', icon: 'team', value: totalUsers, lg: 8, sm: 8 })}
           {this.renderCard({ title: 'Active', icon: 'smile', value: active, lg: 8, sm: 8 })}
-          {this.renderCard({ title: 'frown', icon: 'smile', value: blocked, lg: 8, sm: 8 })}
+          {this.renderCard({ title: 'Blocked', icon: 'frown', value: blocked, lg: 8, sm: 8 })}
         </Row>
         <Row gutter={16}>
-          <Col lg={12} sm={24}>
-            <h1>Game Details</h1>
-            {this.renderTable(tablePlayers)}
-          </Col>
-          <Col lg={12} sm={24}>
-            <h1>Set Game Message</h1>
-            {this.renderSetMessage()}
-          </Col>
+          {tablePlayers && (
+            <Col lg={12} sm={24}>
+              <h1>Game Details</h1>
+              {this.renderTable(tablePlayers)}
+            </Col>
+          )}
+          {isAdmin && (
+            <Col lg={12} sm={24}>
+              <h1>Set Game Message</h1>
+              {this.renderSetMessage()}
+            </Col>
+          )}
         </Row>
       </div>
     );
