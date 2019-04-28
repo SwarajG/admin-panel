@@ -11,7 +11,7 @@ export default class WithDrawDepositPopup extends Component {
     remark: ''
   };
 
-  updateRemark = (e) => this.setState({ remark: e.target.value.trim() })
+  updateRemark = (e) => this.setState({ remark: e.target.value })
 
   updateAmount = (value) => this.setState({ amount: value })
 
