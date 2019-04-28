@@ -13,7 +13,6 @@ export default class AllSettlements extends Component {
   async componentDidMount() {
     const jsonResponse = await getAllSettlement();
     const response = await jsonResponse.json();
-    console.log(response);
     this.setState({
       tableData: response.response,
       loading: false

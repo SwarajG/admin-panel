@@ -14,6 +14,7 @@ import UserDetails from '../UserDetails';
 import SubAdminDetails from '../SubAdminDetails';
 import MasterDetails from '../MasterDetails';
 import OnlineUsers from '../OnlineUsers';
+import SearchPage from '../SearchPage';
 
 const contentWrapper = css`
   min-height: 85vh;
@@ -61,6 +62,9 @@ export function renderContentPage(key) {
       break;
     case navBar.MASTER_DETAILS:
       Component = MasterDetails;
+      break;
+    case navBar.SEARCH:
+      Component = SearchPage;
       break;
     default:
       Component = Dashboard;

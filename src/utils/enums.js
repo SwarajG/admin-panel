@@ -67,7 +67,8 @@ const agentRoles = {
   SUPER_MASTER: 'SUPER_MASTER',
   SUB_ADMIN: 'SUB_ADMIN',
   USER: 'USER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  MASTER: 'MASTER'
 };
 
 const roles = [{
