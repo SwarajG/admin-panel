@@ -13,6 +13,7 @@ import TableDetails from '../TableDetails';
 import UserDetails from '../UserDetails';
 import SubAdminDetails from '../SubAdminDetails';
 import MasterDetails from '../MasterDetails';
+import OnlineUsers from '../OnlineUsers';
 
 const contentWrapper = css`
   min-height: 85vh;
@@ -24,6 +25,9 @@ export function renderContentPage(key) {
   switch (key) {
     case navBar.DASHBOARD:
       Component = Dashboard;
+      break;
+    case navBar.ONLINE_USERS:
+      Component = OnlineUsers;
       break;
     case navBar.ACCOUNT_HISTORY:
       Component = AccountHistory; 
