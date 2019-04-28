@@ -10,9 +10,10 @@ const loaderWrapper = css`
 
 const antIcon = <Icon type="loading" style={{ fontSize: 42 }} spin />;
 
-export default function Loader() {
+export default function Loader(props) {
+  const { className } = props;
   return (
-    <div className={loaderWrapper}>
+    <div className={`${loaderWrapper} ${className}`}>
       <Spin indicator={antIcon} />
     </div>
   )

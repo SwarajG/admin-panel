@@ -13,8 +13,24 @@ const redText = css`
   color: ${colors.red};
 `;
 
+const breadcumbWrapper = css`
+  margin-top: 40px;
+  margin-bottom: 20px;
+`;
+
+const buttonWrapper = css`
+  margin-right: 5px;
+`;
+
+const breadcumbStyle = css`
+  cursor: pointer;
+`;
+
 export default {
   title,
   greenText,
-  redText
+  redText,
+  breadcumbWrapper,
+  buttonWrapper,
+  breadcumbStyle
 };

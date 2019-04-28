@@ -97,7 +97,6 @@ export default class DetailsPage extends Component {
       };
       const jsonResponse = await createSuperMaster({ ...data, ...restData });
       const response = await jsonResponse.json();
-      console.log(response);
       if (response.success) {
         message.success(`Successfully created the ${role}`);
         this.setState({ showSuperMasterPopup: false }, this.refetchData);

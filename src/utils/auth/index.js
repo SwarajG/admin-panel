@@ -34,6 +34,10 @@ class Auth {
     return this.user;
   }
 
+  getUserName() {
+    return this.user && this.user.response && this.user.response.agent.userName;
+  }
+
   getAgentId() {
     return this.user && this.user.response && this.user.response.agent._id;
   }
