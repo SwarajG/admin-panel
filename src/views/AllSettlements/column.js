@@ -26,6 +26,6 @@ export function formatData(data) {
     type: history.type,
     remark: history.remark,
     chips: history.amount,
-    time: `${moment(history.timestamp).utc().format('YYYY-MM-DD')} ${moment(history.timestamp).utc().format('HH:mm:ss')}}`
+    time: `${moment(history.timestamp).utc().format('YYYY-MM-DD')} ${moment(history.timestamp).utc().format('HH:mm:ss')}`
   }))
 }
