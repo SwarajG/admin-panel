@@ -1,0 +1,1 @@
+export const getImageFromCardText = (card) => require(`../assets/${card.substring(2)}.png`);

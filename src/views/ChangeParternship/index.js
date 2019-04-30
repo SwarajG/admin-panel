@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, InputNumber, Radio, message, Button } from 'antd';
 import Card from '../../components/Card';
-import { changePaternship } from '../../request/changePartnership';
+import { changePartnership } from '../../request/changePartnership';
 import { agentRoles } from '../../utils/enums';
 import s from './styles';
 
@@ -20,13 +20,13 @@ export default class ChangeParternship extends Component {
       message.error('Please fill all the required fields');
       return;
     }
-    const jsonResponse = await changePaternship(role, userName, changePercent);
+    const jsonResponse = await changePartnership(role, userName, changePercent);
     const response = await jsonResponse.json();
     if (response.success === 1) {
       message.success('Successfully updated the parternship');
-      this.setState({ userName: '', changePercent: 0, role: agentRoles.SUB_ADMIN });
+      this.setState({ userName: '', changePercent: null, role: agentRoles.SUB_ADMIN });
     } else if (response.success === 0) {
-      message.error('Error while updating the partnership');
+      message.error(response.response);
     }
   }
 
@@ -62,7 +62,7 @@ export default class ChangeParternship extends Component {
               value={changePercent}
               placeholder="Partnership(+/-)"
               onChange={this.onPercentageChange}
-              min={0}
+              min={-100}
               max={100}
             />
           </div>

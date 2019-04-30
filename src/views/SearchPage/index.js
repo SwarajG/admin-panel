@@ -33,7 +33,12 @@ export default class SearchPage extends Component {
     this.setState({ loading: true }, async () => {
       const jsonResponse = await searchUser(role, userName);
       const response = await jsonResponse.json();
-      this.setState({ userData: response.response, loading: false });
+      if (response.success === 1) {
+        this.setState({ userData: response.response, loading: false });
+      } else {
+        message.error('Error while finding the user');
+        this.setState({ loading: false });
+      }
     })
   }
 

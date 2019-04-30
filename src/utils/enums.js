@@ -42,7 +42,9 @@ const navBar = {
 
 const colors = {
   green: '#52c41a',
-  red: '#f5222d'
+  red: '#f5222d',
+  darkGreen: '#006442',
+  darkBlue: '#2196F3'
 };
 
 const selectedKey = {
