@@ -13,7 +13,7 @@ export default class GameHistoryPopup extends Component {
       hakamCard,
       activeEntry
     } = this.props;
-    const data = formatData(activeEntry);
+    const data = formatData(activeEntry, winner);
     return (
       <Modal
         visible={true}

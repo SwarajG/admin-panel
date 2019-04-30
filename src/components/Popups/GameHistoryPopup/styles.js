@@ -1,4 +1,5 @@
 import { css } from 'emotion';
+import { colors } from '../../../utils/enums';
 
 const modalClass = css`
   width: 80% !important;
@@ -15,7 +16,12 @@ const userWrapper = css`
   display: flex;
 `;
 
+const textColor = isWinner => css`
+  color: ${isWinner ? colors.green : colors.red};
+`;
+
 export default {
   modalClass,
-  userWrapper
+  userWrapper,
+  textColor
 };

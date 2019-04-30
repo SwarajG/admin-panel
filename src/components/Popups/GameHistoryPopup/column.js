@@ -34,31 +34,44 @@ const renderUsers = (cards) => {
   );
 }
 
-export function getColumns(list) {
+export function getColumns() {
   return [{
     title: 'Username',
-    dataIndex: 'userName'
+    dataIndex: 'userName',
+    render: (text, row) => (
+      <p className={s.textColor(row.isWinner)}>{text}</p>
+    )
   }, {
     title: 'Chips',
-    dataIndex: 'chips'
+    dataIndex: 'chips',
+    render: (text, row) => (
+      <p className={s.textColor(row.isWinner)}>{text}</p>
+    )
   }, {
     title: 'Cards',
     render: (text, row) => renderUsers(row.cards)
   }, {
     title: 'Amount',
-    dataIndex: 'amount'
+    dataIndex: 'amount',
+    render: (text, row) => (
+      <p className={s.textColor(row.isWinner)}>{text}</p>
+    )
   }, {
     title: 'Date',
-    dataIndex: 'date'
+    dataIndex: 'date',
+    render: (text, row) => (
+      <p className={s.textColor(row.isWinner)}>{text}</p>
+    )
   }];
 }
 
-export function formatData(data) {
+export function formatData(data, winner) {
   return data.map(user => ({
     userName: user.userName,
     chips: user.chips,
     amount: user.amount,
     date: `${moment(user.timeStemp).utc().format('YYYY-MM-DD')} ${moment(user.timeStemp).utc().format('HH:mm:ss')}`,
-    cards: user.cards
+    cards: user.cards,
+    isWinner: winner === user.userName
   }))
 }
