@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Table, Row, Col, Icon, Input, Button, message } from 'antd';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
-import { dashboardRequest, updateMessage } from '../../request/dashboard';
+import { dashboardRequest, updateMessage, updateGameStatus } from '../../request/dashboard';
 import { formatTableData, getColumns } from './columns';
 import s from './styles';
-import { agentRoles } from '../../utils/enums';
+import { agentRoles, gameStatus } from '../../utils/enums';
 import auth from '../../utils/auth';
 
 const { TextArea } = Input;
@@ -31,6 +31,16 @@ export default class Dashboard extends Component {
       dashboard: response.response,
       message: response.response.adSMassage
     });
+  }
+
+  updateGameStatus = async (state) => {
+    const jsonResponse = await updateGameStatus();
+    const response = await jsonResponse.json();
+    if (response.success === 1) {
+      message.success('Successfully updated the game status');
+    } else {
+      message.success('Error while updating the game status');
+    }
   }
 
   getStatusValues = (summaryCount) => {
@@ -145,6 +155,17 @@ export default class Dashboard extends Component {
             <Col lg={12} sm={24}>
               <h1>Set Game Message</h1>
               {this.renderSetMessage()}
+            </Col>
+          )}
+          {isAdmin && (
+            <Col lg={12} sm={24}>
+              <h1>Game Actions</h1>
+              <Button type="primary" onClick={() => this.updateGameStatus(gameStatus.restart)}>
+                Start Game
+              </Button>
+              <Button type="primary" onClick={() => this.updateGameStatus(gameStatus.freeze)} style={{ marginLeft: '15px' }}>
+                End Game
+              </Button>
             </Col>
           )}
         </Row>

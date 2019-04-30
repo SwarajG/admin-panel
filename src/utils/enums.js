@@ -62,7 +62,11 @@ const selectedKey = {
   'chip-summary': navBar.CHIP_SUMMARY,
   'all-settlements': navBar.ALL_SETTLEMENTS,
   search: navBar.SEARCH,
+};
 
+const gameStatus = {
+  restart: 'restart',
+  freeze: 'freeze'
 };
 
 const agentRoles = {
@@ -111,5 +115,6 @@ export {
   agentRoles,
   roles,
   userStatus,
-  actionType
+  actionType,
+  gameStatus
 };
